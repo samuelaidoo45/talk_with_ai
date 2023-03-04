@@ -178,6 +178,33 @@
         height: 50px;
         outline: none;
       }
+
+      .lds-dual-ring {
+        display: inline-block;
+        width: 64px;
+        height: 64px;
+      }
+
+      .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 46px;
+        height: 46px;
+        margin: 1px;
+        border-radius: 50%;
+        border: 5px solid #000;
+        border-color: #000 transparent #000 transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+      }
+
+      @keyframes lds-dual-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -191,6 +218,10 @@
   <p>
     <audio id="recordedAudio"></audio>        
   </p>
+
+  <div id="loader" style="display:none;">
+    <div class="lds-dual-ring"></div>
+  </div>
 
   <script src="https://code.responsivevoice.org/responsivevoice.js?key=078h13HP"></script>
 
@@ -226,6 +257,7 @@
       function sendData(data) {
         let formData = new FormData();
         formData.append('audio_data', data, 'recording.mp3');
+        $("#loader").show();
         $.ajax({
           type: 'POST',
           url: 'https://37soa.edu.gh/whisper_to_chat.php',
@@ -233,6 +265,7 @@
           processData: false,
           contentType: false,
           success: function(response) {
+            $("#loader").hide();
             // response = JSON.parse(response);
             // var utterance = new SpeechSynthesisUtterance();
 
@@ -285,6 +318,7 @@
 
           },
           error: function(jqXHR, status, error) {
+            $("#loader").hide();
             console.log('Error: ' + error);
           }
         });
