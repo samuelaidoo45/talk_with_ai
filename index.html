@@ -87,9 +87,14 @@
   <p>
     <!-- <button type="button" id="record">Record</button> -->
     <!-- <button type="button" id="stopRecord" disabled>Stop</button> -->
-    <button type="button" id="pause" >Pause AI</button>
-    <button type="button" id="continue" >Continue AI</button>
-    <button type="button" id="stop" >Stop AI</button>
+    <div id="ai-controls" style="display:none;">
+
+      <button type="button" id="pause" >Pause AI</button>
+      <button type="button" id="continue" >Continue AI</button>
+      <button type="button" id="stop" >Stop AI</button>
+
+    </div>
+
 
   </p>
 
@@ -157,6 +162,8 @@
         let formData = new FormData();
         formData.append('audio_data', data, 'recording.mp3');
         $("#loader").show();
+        $('#ai-controls').hide();
+
         $.ajax({
           type: 'POST',
           url: 'https://37soa.edu.gh/whisper_to_chat.php',
@@ -165,6 +172,8 @@
           contentType: false,
           success: function(response) {
             $("#loader").hide();
+            $('#ai-controls').show();
+
             
             response = unescapeString(response);
 
