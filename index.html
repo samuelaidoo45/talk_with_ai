@@ -247,7 +247,7 @@
             let blob = new Blob(audioChunks,{type:'audio/mp3'});
             recordedAudio.src = URL.createObjectURL(blob);
             recordedAudio.controls=true;
-            recordedAudio.autoplay=false;
+            recordedAudio.autoplay=true;
             uploadButton.prop('disabled', false);
             sendData(blob)
           }
