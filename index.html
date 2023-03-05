@@ -70,6 +70,27 @@
           transform: rotate(360deg);
         }
       }
+
+            /* Default styles for the buttons */
+      #pause, #continue, #replay, #stop {
+        display: inline-block;
+        margin-right: 10px;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      /* Media query to adjust the buttons for small screens */
+      @media screen and (max-width: 768px) {
+        #pause, #continue, #replay, #stop {
+          display: block;
+          margin-bottom: 10px;
+          width: 100%;
+        }
+      }
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
