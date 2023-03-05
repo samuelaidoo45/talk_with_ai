@@ -91,6 +91,7 @@
 
       <button type="button" id="pause" >Pause AI</button>
       <button type="button" id="continue" >Continue AI</button>
+      <button type="button" id="replay" >Replay AI</button>
       <button type="button" id="stop" >Stop AI</button>
 
     </div>
@@ -122,6 +123,8 @@
       let recordButton = $('#record');
       let stopButton = $('#stopRecord');
       let uploadButton = $('#upload');
+      let replay = "";
+
 
 
       document.getElementById("pause").addEventListener("click", function() {
@@ -139,6 +142,11 @@
       document.getElementById("continue").addEventListener("click", function() {
         responsiveVoice.resume();
       });
+
+      document.getElementById("replay").addEventListener("click", function() {
+        responsiveVoice.speak(replay, "UK English Male", {pitch: 1});
+      });
+
 
       navigator.mediaDevices.getUserMedia({audio:true})
       .then(stream => {handlerFunction(stream)})
@@ -180,6 +188,7 @@
             responsiveVoice.speak(response, "UK English Male", {pitch: 1});
 
             // console.log(response);
+            replay = response;
 
           },
           error: function(jqXHR, status, error) {
