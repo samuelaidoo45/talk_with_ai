@@ -205,23 +205,23 @@
             $('#ai-controls').show();
 
             
-            //response = unescapeString(response);
+            response = unescapeString(response);
 
-            //responsiveVoice.speak(response, "UK English Male", {pitch: 1});
+            responsiveVoice.speak(response, "UK English Male", {pitch: 1});
             
-            var audioContext = new AudioContext();
+//             var audioContext = new AudioContext();
 
-            // decode audio data
-            audioContext.decodeAudioData(response, function(buffer) {
-                // create audio source and play it
-                var source = audioContext.createBufferSource();
-                source.buffer = buffer;
-                source.connect(audioContext.destination);
-                source.start();
-            });
+//             // decode audio data
+//             audioContext.decodeAudioData(response, function(buffer) {
+//                 // create audio source and play it
+//                 var source = audioContext.createBufferSource();
+//                 source.buffer = buffer;
+//                 source.connect(audioContext.destination);
+//                 source.start();
+//             });
 
-            // console.log(response);
-            //replay = response;
+              // console.log(response);
+              replay = response;
 
           },
           error: function(jqXHR, status, error) {
