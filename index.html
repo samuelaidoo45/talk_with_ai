@@ -199,6 +199,7 @@
           data: formData,
           processData: false,
           contentType: false,
+          responseType: 'arraybuffer',
           success: function(response) {
             $("#loader").hide();
             $('#ai-controls').show();
@@ -208,11 +209,19 @@
 
             //responsiveVoice.speak(response, "UK English Male", {pitch: 1});
             
-            const audio = new Audio(response);
-             audio.play();
+            var audioContext = new AudioContext();
+
+            // decode audio data
+            audioContext.decodeAudioData(response, function(buffer) {
+                // create audio source and play it
+                var source = audioContext.createBufferSource();
+                source.buffer = buffer;
+                source.connect(audioContext.destination);
+                source.start();
+            });
 
             // console.log(response);
-            replay = response;
+            //replay = response;
 
           },
           error: function(jqXHR, status, error) {
