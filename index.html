@@ -204,9 +204,12 @@
             $('#ai-controls').show();
 
             
-            response = unescapeString(response);
+            //response = unescapeString(response);
 
-            responsiveVoice.speak(response, "UK English Male", {pitch: 1});
+            //responsiveVoice.speak(response, "UK English Male", {pitch: 1});
+            
+            const audio = new Audio(response);
+             audio.play();
 
             // console.log(response);
             replay = response;
