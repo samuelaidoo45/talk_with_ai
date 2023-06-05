@@ -3,7 +3,7 @@
 <head>
   <title>TalkGPT</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
+  <!-- <style>
           body {
         display: flex;
         flex-direction: column;
@@ -91,6 +91,106 @@
           width: 100%;
         }
       }
+  </style> -->
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #222;
+      color: #fff;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #2196f3;
+      color: #fff;
+      cursor: pointer;
+      margin-right: 10px;
+      outline: none;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: default;
+    }
+
+    #recordedAudio {
+      margin-top: 20px;
+      width: 300px;
+      height: 50px;
+      outline: none;
+    }
+
+    .lds-dual-ring {
+      display: inline-block;
+      width: 64px;
+      height: 64px;
+    }
+
+    .lds-dual-ring:after {
+      content: " ";
+      display: block;
+      width: 46px;
+      height: 46px;
+      margin: 1px;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      border-color: #fff transparent #fff transparent;
+      animation: lds-dual-ring 1.2s linear infinite;
+    }
+
+    @keyframes lds-dual-ring {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Default styles for the buttons */
+    #pause,
+    #continue,
+    #replay,
+    #stop {
+      display: inline-block;
+      margin-right: 10px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #2196f3;
+      color: #fff;
+      outline: none;
+    }
+
+    /* Media query to adjust the buttons for small screens */
+    @media screen and (max-width: 768px) {
+      #pause,
+      #continue,
+      #replay,
+      #stop {
+        display: block;
+        margin-bottom: 10px;
+        width: 100%;
+      }
+    }
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
