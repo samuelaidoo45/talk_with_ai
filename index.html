@@ -317,11 +317,13 @@
 
             response = unescapeString(response);
 
+            //console.log(JSON.parse(response));
+            response = JSON.parse(response);
             // Replace user temp message text with the actual user transcription
-            $(userTempMsg).text("You: " + response.user_input); // Assuming your endpoint returns the user's transcribed text in `response.user_input` (You may need to adjust according to your actual API response)
+            $(userTempMsg).text("You: " + response.user_response); // Assuming your endpoint returns the user's transcribed text in `response.user_input` (You may need to adjust according to your actual API response)
             
             // Append AI message
-            let aiMessage = response; 
+            let aiMessage = response.ai_response; 
             if(typeof response === "object"){
               aiMessage = response.ai_response || "No response";
             }
