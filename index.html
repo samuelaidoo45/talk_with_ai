@@ -429,15 +429,14 @@
 
     <div class="chat-messages" id="chat-messages">
       <div class="empty-state" id="empty-state">
-        <div class="record-icon">&#128264;</div>
+        <div class="record-icon">&#127897;</div>
         <p>Click the microphone to start talking<br>
         <small style="opacity: 0.7">Click the ✓ button when you're done</small></p>
       </div>
     </div>
 
     <div class="chat-footer">
-      <button type="button" id="record" class="record-btn" title="Record your voice">&#128264;</button>
-      <button type="button" id="stopRecord" class="record-btn" title="Send" disabled>&#10004;</button>
+      <button type="button" id="record" class="record-btn" title="Record your voice">&#127897;</button>
       <div id="loader" style="display:none;">
         <div class="lds-dual-ring"></div>
       </div>
@@ -452,7 +451,6 @@
       let rec;
       let recordedAudio = document.getElementById('recordedAudio');
       let recordButton = $('#record');
-      let stopButton = $('#stopRecord');
       let replayText = "";
       
       document.getElementById("pause").addEventListener("click", function() {
@@ -545,27 +543,31 @@
                   .replace(/\\/g, ' ');
       }
 
-      recordButton.click(function() {
-        recordButton.prop('disabled', true);
-        stopButton.prop('disabled', false);
-        audioChunks = [];
-        rec.start();
-        
-        // Show recording state
-        $('.recording-indicator').fadeIn();
-        $('.empty-state .record-icon').addClass('recording');
-        stopButton.addClass('stop-recording');
-      });
+      let isRecording = false;
 
-      stopButton.click(function() {
-        recordButton.prop('disabled', false);
-        stopButton.prop('disabled', true);
-        rec.stop();
-        
-        // Hide recording state
-        $('.recording-indicator').fadeOut();
-        $('.empty-state .record-icon').removeClass('recording');
-        stopButton.removeClass('stop-recording');
+      recordButton.click(function() {
+        if (!isRecording) {
+          // Start recording
+          audioChunks = [];
+          rec.start();
+          isRecording = true;
+          
+          // Show recording state
+          $('.recording-indicator').fadeIn();
+          $('.empty-state .record-icon').addClass('recording');
+          recordButton.addClass('stop-recording');
+          recordButton.html('&#10004;'); // Change to checkmark
+        } else {
+          // Stop recording
+          rec.stop();
+          isRecording = false;
+          
+          // Hide recording state
+          $('.recording-indicator').fadeOut();
+          $('.empty-state .record-icon').removeClass('recording');
+          recordButton.removeClass('stop-recording');
+          recordButton.html('&#127897;'); // Change back to microphone
+        }
       });
 
       // Show/hide empty state based on messages
@@ -587,7 +589,7 @@
         return messageElem;
       }
 
-      // Make empty state icon clickable
+      // Update empty state click handler
       $(".empty-state .record-icon").click(function() {
         $("#record").click();
       });
